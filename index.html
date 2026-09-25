@@ -313,6 +313,31 @@ body{font-family:var(--font-main);font-size:16px;background:var(--bg);line-heigh
 .funding-summary{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:10px;padding:14px 18px;background:#101a28;border-bottom:1px solid #2b3a50}.funding-stat{background:#18263a;border:1px solid #31445e;border-radius:8px;padding:12px}.funding-stat small{display:block;color:#9eb0c8}.funding-stat strong{display:block;font-size:20px;color:#fff;margin-top:3px}.funding-stat.pos strong{color:#ff9aa7}.funding-stat.neg strong{color:#82f0c6}
 .funding-table-wrap{overflow:auto;max-height:68vh}.funding-table{min-width:1120px}.funding-table th{position:sticky;top:0;z-index:2}.funding-rate{font-weight:800;font-variant-numeric:tabular-nums}.funding-pos{color:#ff8191}.funding-neg{color:#58d4ae}.funding-flat{color:#d8e3f1}.funding-note{padding:10px 18px;background:#172235;color:#aebed4;font-size:12px;border-top:1px solid #2b3a50}
 .funding-bias{display:inline-block;padding:3px 7px;border-radius:5px;font-size:11px;font-weight:700}.funding-bias.long-pay{background:#ff819118;color:#ff9aaa;border:1px solid #ff819166}.funding-bias.short-pay{background:#58d4ae18;color:#76e4c0;border:1px solid #58d4ae66}.funding-bias.neutral{background:#ffffff0b;color:#bdc9da;border:1px solid #ffffff22}
+
+/* V6.2 — FUNDING SPLIT TABLES */
+.funding-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px;background:#0d1623}
+.funding-side-card{min-width:0;background:#111c2b;border:1px solid #304158;border-radius:10px;overflow:hidden}
+.funding-side-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;background:#131f30;border-bottom:1px solid #2b3a50;flex-wrap:wrap}
+.funding-side-title{font-size:16px;font-weight:800;color:#fff}
+.funding-side-title.pos{color:#ff9aa7}.funding-side-title.neg{color:#82f0c6}
+.funding-side-sub{font-size:11px;color:#98abc3;margin-top:2px}
+.funding-side-count{font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;border:1px solid #425671;background:#19283b;color:#d8e4f3;white-space:nowrap}
+.funding-side-card .funding-table-wrap{max-height:68vh;border:0;border-radius:0}
+.funding-side-card .funding-table{min-width:1040px}
+.funding-sort-th{padding:0!important}
+.funding-sort-btn{display:flex;align-items:center;gap:5px;width:100%;min-height:0;padding:15px 12px;border:0;border-radius:0;background:transparent;color:inherit;font:600 14px var(--font-main);text-align:left;white-space:nowrap}
+.funding-sort-btn:hover{background:#203049;color:#fff}
+.funding-sort-btn.active{color:#cfe0ff;background:#1b2a40}
+.funding-sort-arrow{font-size:10px;opacity:.9}
+.funding-no-data{text-align:center;color:#9db0c8;padding:28px 14px!important}
+@media(max-width:1250px){.funding-split{grid-template-columns:1fr}.funding-side-card .funding-table-wrap{max-height:54vh}}
+@media(max-width:600px){
+  .funding-split{padding:6px;gap:8px}
+  .funding-side-head{padding:8px 9px}
+  .funding-side-title{font-size:14px}
+  .funding-side-card .funding-table{min-width:820px}
+  .funding-sort-btn{padding:11px 8px;font-size:12px}
+}
 .market-mini{font-size:12px;color:#aebdd0;margin-top:3px}.visual-refreshing{opacity:.65}
 @media(max-width:900px){.funding-summary{grid-template-columns:repeat(2,1fr)}.bubble-stage{min-height:500px;height:65vh}.visual-head{padding:14px}.visual-actions{width:100%}.visual-actions input,.visual-actions select{flex:1;min-width:130px}}
 @media(max-width:560px){.funding-summary{grid-template-columns:1fr 1fr}.bubble-stage{min-height:460px}.bubble-tooltip{max-width:280px}.visual-title{font-size:18px}}
@@ -1293,11 +1318,20 @@ function installMarketVisualTabs(){
   </section>
   <section id="fundingPanel" class="visual-page" hidden>
     <div class="visual-card" id="fundingCard">
-      <div class="visual-head"><div><div class="visual-title">Funding Rate · Binance USDⓈ-M Futures</div><div class="visual-sub">Funding dương: LONG trả SHORT. Funding âm: SHORT trả LONG. Bảng chỉ hiển thị coin thuộc universe scanner để dễ đối chiếu với tín hiệu.</div></div>
-      <div class="visual-actions"><input id="fundingSearch" placeholder="Tìm coin…" oninput="renderFundingPage()"><select id="fundingFilter" onchange="renderFundingPage()"><option value="all">Tất cả funding</option><option value="positive">Funding dương</option><option value="negative">Funding âm</option><option value="extreme">|Funding| ≥ 0,03%</option></select><select id="fundingSort" onchange="fundingSort=this.value;renderFundingPage()"><option value="abs">|Funding| lớn nhất</option><option value="desc">Funding cao → thấp</option><option value="asc">Funding thấp → cao</option><option value="change">Biến động 24h</option><option value="volume">Volume 24h</option><option value="next">Sắp funding sớm</option></select><button onclick="refreshVisualMarketData(true)">↻ Cập nhật</button></div></div>
+      <div class="visual-head"><div><div class="visual-title">Funding Rate · Binance USDⓈ-M Futures</div><div class="visual-sub">Tách riêng 2 phía để đọc nhanh: <b>Funding dương = LONG trả SHORT</b>; <b>Funding âm = SHORT trả LONG</b>. Mặc định mỗi bảng xếp theo độ lớn Funding từ lớn xuống nhỏ. Có thể bấm trực tiếp tiêu đề cột để đổi cách sắp xếp.</div></div>
+      <div class="visual-actions"><input id="fundingSearch" placeholder="Tìm coin…" oninput="renderFundingPage()"><select id="fundingFilter" onchange="renderFundingPage()"><option value="all">Tất cả funding</option><option value="positive">Chỉ Funding dương</option><option value="negative">Chỉ Funding âm</option><option value="extreme">|Funding| ≥ 0,03%</option></select><select id="fundingSort" onchange="setFundingGlobalSort(this.value)"><option value="abs">|Funding| lớn nhất</option><option value="desc">Funding cao → thấp</option><option value="asc">Funding thấp → cao</option><option value="change">Biến động 24h</option><option value="volume">Volume 24h</option><option value="next">Sắp funding sớm</option></select><button onclick="refreshVisualMarketData(true)">↻ Cập nhật</button></div></div>
       <div class="funding-summary" id="fundingSummary"></div>
-      <div class="funding-table-wrap"><table class="funding-table"><thead><tr><th>Coin</th><th>Funding hiện tại</th><th>Bên trả phí</th><th>Chu kỳ</th><th>Funding kế tiếp</th><th>Mark / Index</th><th>Basis</th><th>24h</th><th>Volume 24h</th><th>Setup scanner</th></tr></thead><tbody id="fundingBody"></tbody></table></div>
-      <div class="funding-note">Funding Rate không phải tín hiệu LONG/SHORT độc lập. Funding cực trị có thể phản ánh vị thế đông một phía, nhưng cần kết hợp xu hướng, cấu trúc, thanh khoản và setup của scanner.</div>
+      <div class="funding-split">
+        <div class="funding-side-card">
+          <div class="funding-side-head"><div><div class="funding-side-title pos">▲ FUNDING DƯƠNG · LONG TRẢ PHÍ</div><div class="funding-side-sub">Funding lớn nhất nằm trên cùng</div></div><span class="funding-side-count" id="fundingPositiveCount">0 coin</span></div>
+          <div class="funding-table-wrap"><table class="funding-table"><thead id="fundingPositiveHead"></thead><tbody id="fundingPositiveBody"></tbody></table></div>
+        </div>
+        <div class="funding-side-card">
+          <div class="funding-side-head"><div><div class="funding-side-title neg">▼ FUNDING ÂM · SHORT TRẢ PHÍ</div><div class="funding-side-sub">Funding âm có độ lớn lớn nhất nằm trên cùng</div></div><span class="funding-side-count" id="fundingNegativeCount">0 coin</span></div>
+          <div class="funding-table-wrap"><table class="funding-table"><thead id="fundingNegativeHead"></thead><tbody id="fundingNegativeBody"></tbody></table></div>
+        </div>
+      </div>
+      <div class="funding-note">Bấm tiêu đề <b>Coin, Funding hiện tại, Funding kế tiếp, Basis, 24h hoặc Volume 24h</b> để sắp xếp riêng từng bảng. Funding Rate không phải tín hiệu LONG/SHORT độc lập; nên kết hợp xu hướng, cấu trúc, thanh khoản và setup của scanner.</div>
     </div>
   </section>`);
   visualStatus();renderBubblePage();renderFundingPage();
@@ -1339,15 +1373,79 @@ function renderBubblePage(){
 }
 function positionBubbleTip(ev,stage,tip){const r=stage.getBoundingClientRect();let x=ev.clientX-r.left+14,y=ev.clientY-r.top+14;const tw=tip.offsetWidth||280,th=tip.offsetHeight||190;if(x+tw>r.width-8)x=Math.max(8,x-tw-26);if(y+th>r.height-8)y=Math.max(8,y-th-26);tip.style.left=x+'px';tip.style.top=y+'px';}
 
+const fundingTableSort={
+  positive:{key:'funding',dir:'desc'},
+  negative:{key:'funding',dir:'desc'}
+};
+function fundingSortKeyFromLegacy(v){
+  return v==='change'?'change':v==='volume'?'volume':v==='next'?'next':v==='desc'?'fundingSignedDesc':v==='asc'?'fundingSignedAsc':'funding';
+}
+function setFundingGlobalSort(v){
+  fundingSort=v;
+  const key=fundingSortKeyFromLegacy(v);
+  fundingTableSort.positive={key,dir:'desc'};
+  fundingTableSort.negative={key,dir:'desc'};
+  renderFundingPage();
+}
+function setFundingTableSort(side,key){
+  const s=fundingTableSort[side]||(fundingTableSort[side]={key:'funding',dir:'desc'});
+  if(s.key===key)s.dir=s.dir==='desc'?'asc':'desc';
+  else{s.key=key;s.dir=(key==='symbol')?'asc':'desc';}
+  renderFundingPage();
+}
+function fundingSortArrow(side,key){
+  const s=fundingTableSort[side];return s&&s.key===key?`<span class="funding-sort-arrow">${s.dir==='desc'?'▼':'▲'}</span>`:'';
+}
+function fundingHeader(side){
+  const h=(label,key)=>`<th class="funding-sort-th"><button class="funding-sort-btn ${fundingTableSort[side]?.key===key?'active':''}" onclick="setFundingTableSort('${side}','${key}')">${label}${fundingSortArrow(side,key)}</button></th>`;
+  return `<tr>${h('Coin','symbol')}${h('Funding hiện tại','funding')}<th>Bên trả phí</th><th>Chu kỳ</th>${h('Funding kế tiếp','next')}<th>Mark / Index</th>${h('Basis','basis')}${h('24h','change')}${h('Volume 24h','volume')}<th>Setup scanner</th></tr>`;
+}
+function sortFundingSide(data,side){
+  const s=fundingTableSort[side]||{key:'funding',dir:'desc'},dir=s.dir==='asc'?1:-1;
+  return [...data].sort((a,b)=>{
+    let av,bv;
+    if(s.key==='symbol')return dir*String(a.symbol||'').localeCompare(String(b.symbol||''));
+    if(s.key==='funding'){av=Math.abs(a.fundingRate??0);bv=Math.abs(b.fundingRate??0);}
+    else if(s.key==='fundingSignedDesc'){av=a.fundingRate??0;bv=b.fundingRate??0;return bv-av;}
+    else if(s.key==='fundingSignedAsc'){av=a.fundingRate??0;bv=b.fundingRate??0;return av-bv;}
+    else if(s.key==='next'){av=a.nextFundingTime??Infinity;bv=b.nextFundingTime??Infinity;}
+    else if(s.key==='change'){av=Math.abs(a.change24h??0);bv=Math.abs(b.change24h??0);}
+    else if(s.key==='volume'){av=a.quoteVolume??0;bv=b.quoteVolume??0;}
+    else if(s.key==='basis'){av=Math.abs(a.basisPct??0);bv=Math.abs(b.basisPct??0);}
+    else{av=Math.abs(a.fundingRate??0);bv=Math.abs(b.fundingRate??0);}
+    if(!Number.isFinite(av)&&!Number.isFinite(bv))return 0;
+    if(!Number.isFinite(av))return 1;if(!Number.isFinite(bv))return -1;
+    return dir*(av-bv);
+  });
+}
+function fundingRowHtml(x,best){
+  const r=best.get(x.symbol),pctv=fundingPct(x.fundingRate),cls=!Number.isFinite(pctv)?'funding-flat':pctv>0?'funding-pos':pctv<0?'funding-neg':'funding-flat',
+  payer=!Number.isFinite(pctv)||Math.abs(pctv)<.00005?'<span class="funding-bias neutral">Gần trung tính</span>':pctv>0?'<span class="funding-bias long-pay">LONG trả SHORT</span>':'<span class="funding-bias short-pay">SHORT trả LONG</span>',
+  setup=r?`<b class="${r.ptype==='bull'?'up':'dn'}">${r.ptype==='bull'?'LONG':'SHORT'} ${escapeHtml(r.setup)}</b><div class="market-mini">${labelStatus(lifeState(r))} · P${r.priority} · ${r.tf}</div>`:'<span class="market-mini">Chưa có setup</span>';
+  return `<tr onclick="openLiquidationMap('${x.symbol}')" style="cursor:pointer"><td><b>${escapeHtml(x.symbol.replace('USDT',''))}</b><div class="market-mini">USDT PERP</div></td><td><span class="funding-rate ${cls}">${Number.isFinite(pctv)?formatSigned(pctv,4)+'%':'—'}</span></td><td>${payer}</td><td>${num(x.intervalHours,0)} giờ</td><td><b>${fmtCountdown(x.nextFundingTime)}</b><div class="market-mini">${stamp(x.nextFundingTime)}</div></td><td>${fmtPrice(x.markPrice)}<div class="market-mini">Index ${fmtPrice(x.indexPrice)}</div></td><td class="${(x.basisPct??0)>=0?'up':'dn'}">${formatSigned(x.basisPct,4)}%</td><td class="${x.change24h>=0?'up':'dn'}"><b>${formatSigned(x.change24h,2)}%</b></td><td>${fmtVol(x.quoteVolume)}</td><td>${setup}</td></tr>`;
+}
 function renderFundingPage(){
-  const body=document.getElementById('fundingBody'),sum=document.getElementById('fundingSummary');if(!body||!sum)return;visualStatus();
-  if(marketVisualMarket!=='futures'){sum.innerHTML='<div class="funding-stat"><small>Funding</small><strong>Chỉ có ở Futures</strong></div>';body.innerHTML='<tr><td colspan="10">Chuyển “Thị trường” sang Futures USDT Perpetual để xem Funding Rate.</td></tr>';return;}
-  const best=bestResultBySymbol(),q=(document.getElementById('fundingSearch')?.value||'').trim().toUpperCase(),filter=document.getElementById('fundingFilter')?.value||'all';let data=marketVisualFunding.filter(x=>x.symbol.includes(q));
-  data=data.filter(x=>filter==='positive'?(x.fundingRate??0)>0:filter==='negative'?(x.fundingRate??0)<0:filter==='extreme'?Math.abs(x.fundingRate??0)>=.0003:true);
-  const sort=document.getElementById('fundingSort')?.value||fundingSort;data.sort((a,b)=>sort==='desc'?(b.fundingRate??-Infinity)-(a.fundingRate??-Infinity):sort==='asc'?(a.fundingRate??Infinity)-(b.fundingRate??Infinity):sort==='change'?Math.abs(b.change24h)-Math.abs(a.change24h):sort==='volume'?b.quoteVolume-a.quoteVolume:sort==='next'?(a.nextFundingTime??Infinity)-(b.nextFundingTime??Infinity):Math.abs(b.fundingRate??0)-Math.abs(a.fundingRate??0));
-  const valid=marketVisualFunding.filter(x=>Number.isFinite(x.fundingRate)),pos=[...valid].sort((a,b)=>b.fundingRate-a.fundingRate)[0],neg=[...valid].sort((a,b)=>a.fundingRate-b.fundingRate)[0],next=[...valid].filter(x=>Number.isFinite(x.nextFundingTime)).sort((a,b)=>a.nextFundingTime-b.nextFundingTime)[0];
-  sum.innerHTML=`<div class="funding-stat"><small>Coin trong scanner</small><strong>${marketVisualFunding.length}</strong></div><div class="funding-stat pos"><small>Funding dương cao nhất</small><strong>${pos?`${pos.symbol.replace('USDT','')} ${formatSigned(fundingPct(pos.fundingRate),4)}%`:'—'}</strong></div><div class="funding-stat neg"><small>Funding âm thấp nhất</small><strong>${neg?`${neg.symbol.replace('USDT','')} ${formatSigned(fundingPct(neg.fundingRate),4)}%`:'—'}</strong></div><div class="funding-stat"><small>Kỳ funding gần nhất</small><strong>${next?fmtCountdown(next.nextFundingTime):'—'}</strong></div>`;
-  body.innerHTML=data.map(x=>{const r=best.get(x.symbol),pctv=fundingPct(x.fundingRate),cls=!Number.isFinite(pctv)?'funding-flat':pctv>0?'funding-pos':pctv<0?'funding-neg':'funding-flat',payer=!Number.isFinite(pctv)||Math.abs(pctv)<.00005?'<span class="funding-bias neutral">Gần trung tính</span>':pctv>0?'<span class="funding-bias long-pay">LONG trả SHORT</span>':'<span class="funding-bias short-pay">SHORT trả LONG</span>',setup=r?`<b class="${r.ptype==='bull'?'up':'dn'}">${r.ptype==='bull'?'LONG':'SHORT'} ${escapeHtml(r.setup)}</b><div class="market-mini">${labelStatus(lifeState(r))} · P${r.priority} · ${r.tf}</div>`:'<span class="market-mini">Chưa có setup</span>';return `<tr onclick="openLiquidationMap('${x.symbol}')" style="cursor:pointer"><td><b>${escapeHtml(x.symbol.replace('USDT',''))}</b><div class="market-mini">USDT PERP</div></td><td><span class="funding-rate ${cls}">${Number.isFinite(pctv)?formatSigned(pctv,4)+'%':'—'}</span></td><td>${payer}</td><td>${num(x.intervalHours,0)} giờ</td><td><b>${fmtCountdown(x.nextFundingTime)}</b><div class="market-mini">${stamp(x.nextFundingTime)}</div></td><td>${fmtPrice(x.markPrice)}<div class="market-mini">Index ${fmtPrice(x.indexPrice)}</div></td><td class="${(x.basisPct??0)>=0?'up':'dn'}">${formatSigned(x.basisPct,4)}%</td><td class="${x.change24h>=0?'up':'dn'}"><b>${formatSigned(x.change24h,2)}%</b></td><td>${fmtVol(x.quoteVolume)}</td><td>${setup}</td></tr>`;}).join('')||'<tr><td colspan="10">Không có coin phù hợp bộ lọc funding hiện tại.</td></tr>';
+  const posBody=document.getElementById('fundingPositiveBody'),negBody=document.getElementById('fundingNegativeBody'),sum=document.getElementById('fundingSummary');
+  if(!posBody||!negBody||!sum)return;visualStatus();
+  const posHead=document.getElementById('fundingPositiveHead'),negHead=document.getElementById('fundingNegativeHead');
+  if(posHead)posHead.innerHTML=fundingHeader('positive');if(negHead)negHead.innerHTML=fundingHeader('negative');
+  if(marketVisualMarket!=='futures'){
+    sum.innerHTML='<div class="funding-stat"><small>Funding</small><strong>Chỉ có ở Futures</strong></div>';
+    posBody.innerHTML='<tr><td class="funding-no-data" colspan="10">Chuyển “Thị trường” sang Futures USDT Perpetual để xem Funding Rate.</td></tr>';
+    negBody.innerHTML='<tr><td class="funding-no-data" colspan="10">Chuyển “Thị trường” sang Futures USDT Perpetual để xem Funding Rate.</td></tr>';
+    return;
+  }
+  const best=bestResultBySymbol(),q=(document.getElementById('fundingSearch')?.value||'').trim().toUpperCase(),filter=document.getElementById('fundingFilter')?.value||'all';
+  let base=marketVisualFunding.filter(x=>x.symbol.includes(q)&&Number.isFinite(x.fundingRate));
+  if(filter==='extreme')base=base.filter(x=>Math.abs(x.fundingRate)>=.0003);
+  let posData=base.filter(x=>x.fundingRate>0),negData=base.filter(x=>x.fundingRate<0);
+  if(filter==='positive')negData=[];if(filter==='negative')posData=[];
+  posData=sortFundingSide(posData,'positive');negData=sortFundingSide(negData,'negative');
+  const valid=marketVisualFunding.filter(x=>Number.isFinite(x.fundingRate)),pos=[...valid].filter(x=>x.fundingRate>0).sort((a,b)=>b.fundingRate-a.fundingRate)[0],neg=[...valid].filter(x=>x.fundingRate<0).sort((a,b)=>a.fundingRate-b.fundingRate)[0],next=[...valid].filter(x=>Number.isFinite(x.nextFundingTime)).sort((a,b)=>a.nextFundingTime-b.nextFundingTime)[0];
+  sum.innerHTML=`<div class="funding-stat"><small>Coin trong scanner</small><strong>${marketVisualFunding.length}</strong></div><div class="funding-stat pos"><small>Funding dương cao nhất</small><strong>${pos?`${pos.symbol.replace('USDT','')} ${formatSigned(fundingPct(pos.fundingRate),4)}%`:'—'}</strong></div><div class="funding-stat neg"><small>Funding âm lớn nhất |abs|</small><strong>${neg?`${neg.symbol.replace('USDT','')} ${formatSigned(fundingPct(neg.fundingRate),4)}%`:'—'}</strong></div><div class="funding-stat"><small>Kỳ funding gần nhất</small><strong>${next?fmtCountdown(next.nextFundingTime):'—'}</strong></div>`;
+  const pc=document.getElementById('fundingPositiveCount'),nc=document.getElementById('fundingNegativeCount');if(pc)pc.textContent=`${posData.length} coin`;if(nc)nc.textContent=`${negData.length} coin`;
+  posBody.innerHTML=posData.map(x=>fundingRowHtml(x,best)).join('')||'<tr><td class="funding-no-data" colspan="10">Không có coin Funding dương phù hợp bộ lọc.</td></tr>';
+  negBody.innerHTML=negData.map(x=>fundingRowHtml(x,best)).join('')||'<tr><td class="funding-no-data" colspan="10">Không có coin Funding âm phù hợp bộ lọc.</td></tr>';
 }
 
 const switchPageBaseV51=switchPage;
