@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Futures Opportunity Scanner V6 — Binance + Liquidation Map</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -323,6 +323,185 @@ body{font-family:var(--font-main);font-size:16px;background:var(--bg);line-heigh
 .liq-page{margin-top:14px}.liq-card{background:var(--bg2);border:1px solid #344052;border-radius:12px;overflow:hidden}.liq-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid #2b3a50;background:#131e2d;flex-wrap:wrap}.liq-title{font-size:22px;font-weight:700;color:#fff}.liq-sub{font-size:13px;color:var(--text2);margin-top:5px;max-width:980px;line-height:1.55}.liq-controls{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}.liq-control{display:flex;flex-direction:column;gap:4px}.liq-control label{font-size:11px;color:#9cafc8}.liq-control input,.liq-control select{min-width:130px}.liq-symbol{min-width:150px!important;text-transform:uppercase}.liq-key{min-width:210px!important}.liq-primary{background:#a6c7ff;color:#11213a;border:0;font-weight:700}.liq-status{padding:10px 18px;background:#111b29;border-bottom:1px solid #28374b;color:#afc0d8;font-size:12px}.liq-status.bad{color:#ffd19b;background:#2b241d}.liq-grid{display:grid;grid-template-columns:repeat(7,minmax(135px,1fr));gap:10px;padding:14px 18px;background:#101a28;border-bottom:1px solid #2b3a50}.liq-stat{background:#18263a;border:1px solid #31445e;border-radius:9px;padding:12px;min-width:0}.liq-stat small{display:block;color:#9eafc7;font-size:12px}.liq-stat strong{display:block;color:#fff;font-size:20px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.liq-stat.long strong{color:#6fe0c0}.liq-stat.short strong{color:#ffb05c}.liq-stat.ratio strong{color:#c8d9ff}.liq-main{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(310px,.85fr);gap:12px;padding:14px;background:#0d1623}.liq-chart-card,.liq-analysis-card{background:#111c2b;border:1px solid #304158;border-radius:10px;overflow:hidden}.liq-chart-head{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-bottom:1px solid #26364a;font-size:12px;color:#aebed2;flex-wrap:wrap}.liq-chart-wrap{height:440px;position:relative}.liq-chart-wrap canvas{width:100%;height:100%;display:block}.liq-analysis-card{padding:16px}.liq-analysis-card h3{margin:0 0 10px;font-size:17px;color:#fff}.liq-analysis{font-size:14px;color:#c5d2e3;line-height:1.65}.liq-analysis p{margin:0 0 10px}.liq-analysis .upside{color:#ffbd76}.liq-analysis .downside{color:#79e2c3}.liq-analysis .warn{color:#f4cf77}.liq-source-note{font-size:11px;color:#91a4bd;padding:9px 14px;background:#0c1522;border-top:1px solid #26364a}.liq-cluster-wrap{padding:0 14px 14px;background:#0d1623}.liq-cluster-wrap h3{font-size:17px;margin:3px 0 10px}.liq-table-wrap{overflow:auto;max-height:420px;border:1px solid #304158;border-radius:9px}.liq-table{min-width:900px}.liq-table th{position:sticky;top:0;z-index:2}.liq-side{font-weight:800}.liq-side.short{color:#ffb05c}.liq-side.long{color:#6fe0c0}.liq-score{font-weight:800;color:#c8d9ff}.liq-bar{height:5px;background:#26364a;border-radius:5px;overflow:hidden;margin-top:5px;width:100px}.liq-bar i{display:block;height:100%;background:#9bbcff}.liq-empty{display:grid;place-items:center;min-height:360px;text-align:center;padding:30px;color:#aebed2}.liq-empty b{display:block;color:#fff;font-size:20px;margin-bottom:7px}.liq-provider-tip{font-size:11px;color:#91a4bd;max-width:360px}.liq-cg-box{display:none}.liq-cg-box.on{display:flex}.liq-link-btn{min-height:32px;padding:5px 9px;font-size:12px}.liq-mini{font-size:11px;color:#93a8c2;margin-top:4px}.liq-chip{display:inline-flex;padding:2px 6px;border-radius:5px;border:1px solid #415874;background:#17263a;color:#c6d5e8;font-size:10px;margin:1px 3px 1px 0}.liq-quick{font-size:11px;color:#aabbd0;margin-top:5px;line-height:1.4}.liq-quick b{color:#cfe0ff;font-size:11px}.liq-live-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;background:#173328;border:1px solid #2c6a50;color:#72dfb8;font-size:11px}.liq-live-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#58d4ae}.liq-method{padding:12px 16px;border-top:1px solid #2c3b50;background:#121d2c;color:#9fb0c8;font-size:12px;line-height:1.55}.liq-method b{color:#dce7f5}.liq-loading{opacity:.58}.liq-loading .liq-primary{pointer-events:none}
 @media(max-width:1250px){.liq-grid{grid-template-columns:repeat(4,1fr)}.liq-main{grid-template-columns:1fr}.liq-chart-wrap{height:410px}}
 @media(max-width:760px){.liq-grid{grid-template-columns:repeat(2,1fr)}.liq-controls{width:100%}.liq-control{flex:1;min-width:140px}.liq-control input,.liq-control select{width:100%;min-width:0}.liq-chart-wrap{height:360px}.liq-head{padding:14px}.liq-main{padding:9px}.liq-cluster-wrap{padding:0 9px 10px}}
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   V6.2 — RESPONSIVE DEVICE LAYOUT
+   Auto modes: desktop / tablet / phone.
+   Presentation only: does not change scanner/trading calculations.
+   ═══════════════════════════════════════════════════════════════ */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-x:none}
+body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.wrap{width:100%}
+.page-nav,.tbl-wrap,.table-scroll,.funding-table-wrap,.liq-table-wrap{-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}
+.page-nav{scroll-snap-type:x proximity}
+.page-nav button{scroll-snap-align:start}
+
+/* TABLET: 601–1024 CSS px, including most iPads/tablets in portrait. */
+body.device-tablet .wrap{max-width:none;padding:12px}
+body.device-tablet .controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:14px}
+body.device-tablet .settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.device-tablet .perf-strip{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.device-tablet .liq-grid{grid-template-columns:repeat(4,minmax(0,1fr));padding:12px;gap:8px}
+body.device-tablet .liq-main{grid-template-columns:1fr;padding:10px}
+body.device-tablet .liq-chart-wrap{height:390px}
+body.device-tablet .funding-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* PHONE: compact-wide workspace. Keep content readable while using almost all viewport width. */
+body.device-phone{font-size:14px;overflow-x:hidden}
+body.device-phone::before{background-size:34px 34px}
+body.device-phone .wrap{max-width:none;width:100%;padding:4px 4px 10px;margin:0}
+body.device-phone .hdr{padding:9px 10px;margin-bottom:6px;border-radius:7px;min-height:0}
+body.device-phone .hdr-l{gap:6px;min-width:0}
+body.device-phone .hdr-r{display:none}
+body.device-phone .title{font-size:15px;line-height:1.2;letter-spacing:0;white-space:normal}
+body.device-phone .subtitle{font-size:10px;line-height:1.25;margin-top:3px;white-space:normal}
+
+/* Navigation stays one row and can be swiped horizontally. */
+body.device-phone .page-nav{display:flex;gap:2px;margin:6px 0 8px;padding:0 1px;overflow-x:auto;overflow-y:hidden;border-bottom:1px solid #334155;position:sticky;top:0;z-index:60;background:var(--bg);scrollbar-width:none}
+body.device-phone .page-nav::-webkit-scrollbar{display:none}
+body.device-phone .page-nav button{display:block;flex:0 0 auto;width:auto;min-height:34px;padding:7px 9px;font-size:11px;white-space:nowrap;border-radius:0}
+body.device-phone .page-nav button.selected{border-bottom-width:2px}
+
+/* Scanner controls: two compact columns instead of a long single column. */
+body.device-phone .controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:7px;margin-bottom:6px;border-radius:7px;align-items:end}
+body.device-phone .controls .cg{min-width:0;gap:3px}
+body.device-phone .controls .cl{font-size:10px;line-height:1.15}
+body.device-phone .controls select,body.device-phone .controls input{width:100%;min-width:0;min-height:34px;height:34px;padding:5px 7px;font-size:11px}
+body.device-phone .controls .tg{gap:3px}
+body.device-phone .controls .tog{min-height:29px;padding:5px 7px;font-size:10px;flex:1 1 auto;text-align:center}
+body.device-phone .controls .btn-live,body.device-phone .controls .btn-settings,body.device-phone .controls .btn-clear{width:100%;min-height:34px;padding:6px 8px;font-size:11px}
+
+/* Dense information bars use horizontal swipe rather than wasting vertical space. */
+body.device-phone .smart-info{font-size:11px;line-height:1.4;padding:4px 2px;margin-bottom:5px}
+body.device-phone .stats{display:flex;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:12px;padding:6px 8px;margin-bottom:6px;white-space:nowrap;border-radius:6px;scrollbar-width:none}
+body.device-phone .stats::-webkit-scrollbar{display:none}
+body.device-phone .stats-l{display:flex;flex-wrap:nowrap;gap:12px}
+body.device-phone .st,body.device-phone .stl,body.device-phone .stv,body.device-phone .stats-r{font-size:10px;white-space:nowrap}
+body.device-phone .toolbar{gap:5px;margin-bottom:6px;align-items:center}
+body.device-phone .chips{gap:3px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}
+body.device-phone .chips::-webkit-scrollbar{display:none}
+body.device-phone .chip{flex:0 0 auto;padding:4px 8px;font-size:10px}
+body.device-phone .toolbar-r{gap:4px;width:100%}
+body.device-phone .toolbar-r input{min-width:0;flex:1 1 130px;min-height:34px;height:34px;padding:5px 7px;font-size:11px}
+body.device-phone .sound-btn{min-height:32px;padding:4px 7px;font-size:10px}
+
+/* Main scanner table: show all columns, make them denser, swipe horizontally. */
+body.device-phone .tbl-wrap,body.device-phone .table-scroll{width:100%;overflow:auto;border-radius:6px}
+body.device-phone table{min-width:820px}
+body.device-phone th{display:table-cell!important;padding:8px 7px;font-size:10px;line-height:1.15}
+body.device-phone td{display:table-cell!important;padding:8px 7px;font-size:11px;line-height:1.3}
+body.device-phone td:nth-child(n),body.device-phone th:nth-child(n){visibility:visible}
+body.device-phone .coin-ico{width:24px;height:24px;font-size:9px}
+body.device-phone .coin-cell{gap:5px}
+body.device-phone .coin-name{font-size:12px}
+body.device-phone .mini-line{font-size:10px;line-height:1.3;max-width:180px;margin-top:2px}
+body.device-phone .status-b{font-size:9px;padding:2px 5px}
+body.device-phone .act-btn{font-size:10px;min-height:28px;padding:3px 6px;margin-top:4px}
+
+/* Confluence / performance / settings compact mobile layout. */
+body.device-phone .conf-panel,body.device-phone #settingsPanel,body.device-phone #performancePanel{padding:8px;margin:7px 0;border-radius:7px}
+body.device-phone .conf-grid,body.device-phone .settings-grid{grid-template-columns:1fr;gap:7px}
+body.device-phone .conf-group{padding:8px}
+body.device-phone .conf-title{font-size:13px}
+body.device-phone .conf-sub,body.device-phone .conf-note,body.device-phone .conf-check{font-size:11px}
+body.device-phone .perf-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-bottom:6px}
+body.device-phone .perf-card{padding:7px}
+body.device-phone .perf-label{font-size:9px}
+body.device-phone .perf-value{font-size:13px}
+body.device-phone .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+body.device-phone .metric-grid>div{padding:10px}
+body.device-phone .metric-grid strong{font-size:18px}
+
+/* Market Bubbles / Funding */
+body.device-phone .visual-page{margin-top:5px}
+body.device-phone .visual-card{border-radius:7px}
+body.device-phone .visual-head{padding:9px;gap:7px}
+body.device-phone .visual-title{font-size:16px}
+body.device-phone .visual-sub{font-size:10px;line-height:1.35}
+body.device-phone .visual-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:5px}
+body.device-phone .visual-actions input,body.device-phone .visual-actions select,body.device-phone .visual-actions button{width:100%;min-width:0;min-height:33px;height:33px;padding:4px 6px;font-size:10px}
+body.device-phone .bubble-stage{height:62vh;min-height:390px}
+body.device-phone .bubble-legend{padding:6px 8px;gap:7px;font-size:10px}
+body.device-phone .bubble-tooltip{min-width:210px;max-width:calc(100vw - 18px);padding:9px;font-size:10px}
+body.device-phone .funding-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:7px}
+body.device-phone .funding-stat{padding:7px}
+body.device-phone .funding-stat small{font-size:9px}
+body.device-phone .funding-stat strong{font-size:14px}
+body.device-phone .funding-table{min-width:820px}
+body.device-phone .funding-note{padding:7px 9px;font-size:10px}
+
+/* LIQUIDATION MAP: maximize usable width on phone. */
+body.device-phone .liq-page{margin-top:5px}
+body.device-phone .liq-card{border-radius:7px}
+body.device-phone .liq-head{display:block;padding:9px 8px;gap:6px}
+body.device-phone .liq-title{font-size:17px;line-height:1.2}
+body.device-phone .liq-sub{font-size:10px;line-height:1.35;margin-top:3px;max-width:none}
+body.device-phone .liq-controls{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:5px;margin-top:8px;align-items:end;width:100%}
+body.device-phone .liq-control{min-width:0;gap:2px}
+body.device-phone .liq-control label{font-size:9px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.device-phone .liq-control input,body.device-phone .liq-control select{width:100%;min-width:0!important;min-height:35px;height:35px;padding:5px 7px;font-size:11px;border-radius:5px}
+body.device-phone .liq-symbol{font-size:12px!important;font-weight:700;letter-spacing:.2px}
+body.device-phone .liq-controls .liq-control:nth-child(3){grid-column:1/-1}
+body.device-phone .liq-controls .liq-cg-box.on{grid-column:1/-1;display:flex}
+body.device-phone .liq-controls .liq-primary{width:100%;min-height:35px;height:35px;padding:5px 7px;font-size:11px}
+body.device-phone .liq-status{padding:6px 8px;font-size:9px;line-height:1.35;white-space:normal}
+body.device-phone .liq-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:7px}
+body.device-phone .liq-stat{padding:7px;border-radius:6px}
+body.device-phone .liq-stat small{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.device-phone .liq-stat strong{font-size:14px;margin-top:2px}
+body.device-phone .liq-main{grid-template-columns:1fr;gap:6px;padding:6px}
+body.device-phone .liq-chart-card,body.device-phone .liq-analysis-card{border-radius:7px}
+body.device-phone .liq-chart-head{padding:6px 7px;font-size:9px;gap:4px;white-space:normal}
+body.device-phone .liq-live-badge{padding:2px 5px;font-size:8px}
+body.device-phone .liq-chart-wrap{height:315px;min-height:315px}
+body.device-phone .liq-source-note{font-size:9px;line-height:1.35;padding:6px 7px}
+body.device-phone .liq-analysis-card{padding:8px}
+body.device-phone .liq-analysis-card h3,body.device-phone .liq-cluster-wrap h3{font-size:13px;margin:0 0 5px}
+body.device-phone .liq-analysis{font-size:11px;line-height:1.45}
+body.device-phone .liq-analysis p{margin-bottom:6px}
+body.device-phone .liq-cluster-wrap{padding:0 6px 6px}
+body.device-phone .liq-table{min-width:690px}
+body.device-phone .liq-table th{font-size:9px;padding:6px}
+body.device-phone .liq-table td{font-size:10px;padding:6px}
+body.device-phone .liq-bar{width:72px}
+body.device-phone .liq-mini{font-size:9px}
+body.device-phone .liq-method{padding:7px 8px;font-size:9px;line-height:1.4}
+
+/* Full-screen detail modal on phone; no wasted outer margin. */
+body.device-phone .modal-ov{align-items:stretch;justify-content:stretch}
+body.device-phone .modal{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;border-left:0;border-right:0}
+body.device-phone .modal-hdr{padding:7px 9px}
+body.device-phone .modal-title{font-size:13px}
+body.device-phone .modal-meta{font-size:9px}
+body.device-phone .chart-tabs{overflow-x:auto;scrollbar-width:none}
+body.device-phone .chart-tabs::-webkit-scrollbar{display:none}
+body.device-phone .ctab{flex:0 0 auto;padding:6px 9px;font-size:9px}
+body.device-phone .chart-info-bar{gap:7px;padding:5px 7px;font-size:9px;overflow-x:auto;flex-wrap:nowrap}
+body.device-phone .signal-details{grid-template-columns:1fr;font-size:10px;padding:6px 8px}
+
+/* Very narrow phones (<=380px): stay two columns where useful but tighten further. */
+@media(max-width:380px){
+  body.device-phone .wrap{padding-left:2px;padding-right:2px}
+  body.device-phone .controls{gap:4px;padding:5px}
+  body.device-phone .liq-head{padding:7px 6px}
+  body.device-phone .liq-controls{gap:4px}
+  body.device-phone .liq-grid{gap:4px;padding:5px}
+  body.device-phone .liq-chart-wrap{height:285px;min-height:285px}
+  body.device-phone table{min-width:780px}
+}
+
+/* Landscape phones: take advantage of the extra width. */
+@media(max-width:950px) and (orientation:landscape){
+  body.device-phone .controls{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.device-phone .liq-controls{grid-template-columns:1.15fr .65fr 1.15fr .7fr}
+  body.device-phone .liq-controls .liq-control:nth-child(3){grid-column:auto}
+  body.device-phone .liq-controls .liq-cg-box.on{grid-column:auto}
+  body.device-phone .liq-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  body.device-phone .liq-chart-wrap{height:68vh;min-height:280px;max-height:430px}
+  body.device-phone .funding-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 
 </style>
 </head>
@@ -1288,6 +1467,39 @@ function installLiquidationTab(){
 }
 
 
+
+
+// ── V6.2 RESPONSIVE DEVICE LAYOUT ─────────────────────────────
+// Presentation-only device classifier. No scanner/trading logic is changed.
+function applyResponsiveDeviceLayout(){
+  const w=Math.min(window.innerWidth||9999,document.documentElement.clientWidth||9999);
+  const body=document.body;
+  if(!body)return;
+  body.classList.remove('device-phone','device-tablet','device-desktop');
+  const mode=w<=600?'phone':(w<=1024?'tablet':'desktop');
+  body.classList.add('device-'+mode);
+  body.dataset.deviceLayout=mode;
+  // Keep the active navigation tab visible after layout/orientation changes.
+  requestAnimationFrame(()=>{
+    const nav=document.querySelector('.page-nav');
+    const selected=nav?.querySelector('button.selected');
+    if(nav&&selected&&mode!=='desktop'){
+      const left=selected.offsetLeft-Math.max(0,(nav.clientWidth-selected.offsetWidth)/2);
+      nav.scrollTo({left:Math.max(0,left),behavior:'auto'});
+    }
+    if(liqCurrent&&activePage==='liquidation')drawLiqChart(liqCurrent);
+  });
+}
+function installResponsiveDeviceLayout(){
+  let timer=0;
+  const update=()=>{clearTimeout(timer);timer=setTimeout(applyResponsiveDeviceLayout,70);};
+  applyResponsiveDeviceLayout();
+  window.addEventListener('resize',update,{passive:true});
+  window.addEventListener('orientationchange',()=>setTimeout(applyResponsiveDeviceLayout,160),{passive:true});
+  if(window.visualViewport)window.visualViewport.addEventListener('resize',update,{passive:true});
+}
+
+installResponsiveDeviceLayout();
 syncConfluenceUI();bindConfluenceUI();initV5();installMarketVisualTabs();installLiquidationTab();switchPage('opportunities');updatePerformanceStrip();
 window.__SMART_SCANNER_CORE__={median,percentileRank,mad,calcEMA,calcATR,calcRSI,detectCandles,findPivots,detectLiquiditySweep,detectStructure,findRecentBreak,detectChartPatterns,marketRegime,analyzeVolume,depthMetrics,buildRiskPlan,volumeProfileFixed,marketStructureV42,trendSnapshot,presetFor};
 
